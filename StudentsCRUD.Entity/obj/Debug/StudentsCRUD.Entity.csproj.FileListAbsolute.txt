@@ -1,0 +1,14 @@
+C:\Users\Madlen\source\repos\StudentsCRUD\StudentsCRUD.Entity\bin\Debug\StudentsCRUD.Entity.dll.config
+C:\Users\Madlen\source\repos\StudentsCRUD\StudentsCRUD.Entity\bin\Debug\StudentsCRUD.Entity.dll
+C:\Users\Madlen\source\repos\StudentsCRUD\StudentsCRUD.Entity\bin\Debug\StudentsCRUD.Entity.pdb
+C:\Users\Madlen\source\repos\StudentsCRUD\StudentsCRUD.Entity\bin\Debug\EntityFramework.dll
+C:\Users\Madlen\source\repos\StudentsCRUD\StudentsCRUD.Entity\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Madlen\source\repos\StudentsCRUD\StudentsCRUD.Entity\bin\Debug\EntityFramework.xml
+C:\Users\Madlen\source\repos\StudentsCRUD\StudentsCRUD.Entity\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Madlen\source\repos\StudentsCRUD\StudentsCRUD.Entity\obj\Debug\StudentsCRUD.Entity.csprojAssemblyReference.cache
+C:\Users\Madlen\source\repos\StudentsCRUD\StudentsCRUD.Entity\obj\Debug\StudentsCRUD.Entity.csproj.CoreCompileInputs.cache
+C:\Users\Madlen\source\repos\StudentsCRUD\StudentsCRUD.Entity\obj\Debug\StudentsCRUD.Entity.csproj.CopyComplete
+C:\Users\Madlen\source\repos\StudentsCRUD\StudentsCRUD.Entity\obj\Debug\StudentsCRUD.Entity.dll
+C:\Users\Madlen\source\repos\StudentsCRUD\StudentsCRUD.Entity\obj\Debug\StudentsCRUD.Entity.pdb
+C:\Users\Madlen\source\repos\StudentsCRUD\StudentsCRUD.Entity\obj\Debug\StudentsCRUD.Entity.Migrations.firstmigration.resources
+C:\Users\Madlen\source\repos\StudentsCRUD\StudentsCRUD.Entity\obj\Debug\StudentsCRUD.Entity.csproj.GenerateResource.cache

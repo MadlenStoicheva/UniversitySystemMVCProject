@@ -1,0 +1,59 @@
+﻿@model StudentsCRUD.Models.SubjectViewModel.SubjectViewModel
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2 style="text-align:center">Delete</h2>
+
+<h4 style="text-align:center;">Are you sure you want to delete this?</h4>
+<hr />
+<div class="col-md-offset-4">
+    <dl class="dl-horizontal">
+        <dt style="color: #333; font-size:20px;">
+            @Html.DisplayName("Teacher")
+        </dt>
+
+        <dd style="font-size:20px;">
+            @Html.DisplayFor(model => model.TeacherId)
+        </dd>
+
+        <dt style="color: #333; font-size:20px;">
+            @Html.DisplayName("Title")
+        </dt>
+
+        <dd style="font-size:20px;">
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+
+        <dt style="color: #333; font-size:20px;">
+            @Html.DisplayName("Description")
+        </dt>
+
+        <dd style="font-size:20px;">
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+        <dt style="color: #333; font-size:20px;">
+            @Html.DisplayName("Credits")
+        </dt>
+
+        <dd style="font-size:20px;">
+            @Html.DisplayFor(model => model.Credits)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="col-md-offset-2 col-md-10" style="margin-bottom:30px;">
+            <input type="submit" value="Delete" class="btn-success" style="border-radius:15px; background-color:#333; border-color:#333; height:2.5em; width:5em;" />
+
+            <button class="btn-default" style="border-radius:15px; height:2.5em; width:5em;">
+                @Html.ActionLink("Cancel", "Index")
+            </button>
+        </div>
+    }
+</div>
+

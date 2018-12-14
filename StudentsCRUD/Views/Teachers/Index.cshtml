@@ -1,0 +1,41 @@
+﻿@model StudentsCRUD.Models.TeacherViewModel.TeacherListViewModel
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2 style="text-align:center">Teachers</h2>
+
+<button class="btn-success" style="border-radius:25px; background-color:#333; border-color:#333; height:3em; width:7em; margin-bottom:20px; ">
+    @Html.ActionLink("Create new", "Create", "Teachers", new { @style = "color:white; text-decoration:none; font-weight:bold;" })
+</button>
+
+<table class="table">
+    <thead>
+        <tr class="btn-success" style="background-color:#333; border-color:#333;">
+            <th style="text-align:center;">First Name</th>
+            <th style="text-align:center;">Last Name</th>
+            <th style="text-align:center;">Qualification Degree</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var teacher in Model.Teachers)
+        {
+            <tr class="bg-info text-white" style="text-align:center; background-color:transparent;">
+                <td>@teacher.FirstName</td>
+                <td>@teacher.LastName</td>
+                <td>@teacher.QualificationDegree</td>
+                <td>
+                    <button class="btn-default" style="border-radius:15px; height:2.5em; width:5em;">
+                        @Html.ActionLink("Edit", "Edit", "Teachers", new { id = teacher.Id }, null)
+                    </button>
+                    <button class="btn-default" style="border-radius:15px; height:2.5em; width:5em;">
+                        @Html.ActionLink("Delete", "Delete", "Teachers", new { id = teacher.Id }, null)
+                    </button>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+

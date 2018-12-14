@@ -1,0 +1,82 @@
+﻿@model StudentsCRUD.Models.TeacherViewModel.TeacherViewModel
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2 style="text-align:center">Edit</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="container-fluid">
+        <div class="form-horizontal">
+            <hr />
+            <div class="form-group">
+                @Html.LabelFor(model => model.FirstName, "First Name", htmlAttributes: new { @class = "control-label col-md-5", @style = "color: #333; font-size:22px;" })
+
+                @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
+
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.LastName, "Last Name", htmlAttributes: new { @class = "control-label col-md-5", @style = "color: #333; font-size:22px;" })
+
+                @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control col-md-offset-5" } })
+                @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
+
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.QualificationDegree, "Qualification Degree", htmlAttributes: new { @class = "control-label col-md-5", @style = "color: #333; font-size:22px;" })
+
+                @{
+                    List<SelectListItem> listItems = new List<SelectListItem>();
+                    listItems.Add(new SelectListItem
+                    {
+                        Text = "-- Select Status --",
+                        Value = "-- Select Status --",
+                        Selected = true
+                    });
+                    listItems.Add(new SelectListItem
+                    {
+                        Text = "Bachelor",
+                        Value = "Bachelor"
+                    });
+                    listItems.Add(new SelectListItem
+                    {
+                        Text = "Master",
+                        Value = "Master",
+
+                    });
+                    listItems.Add(new SelectListItem
+                    {
+                        Text = "Doctor",
+                        Value = "Doctor"
+                    });
+                    listItems.Add(new SelectListItem
+                    {
+                        Text = "Professor",
+                        Value = "Professor"
+                    });
+
+                }
+
+                @Html.DropDownListFor(model => model.QualificationDegree, listItems, new { @class = "form-control col-md-offset" })
+
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-5 col-md-10">
+                    <input type="submit" value="Save" class="btn-success" style="border-radius:15px; background-color:#333; border-color:#333; height:2.5em; width:5em;" />
+
+                    <button class="btn-default" style="border-radius:15px; height:2.5em; width:5em;">
+                        @Html.ActionLink("Cancel", "Index")
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
