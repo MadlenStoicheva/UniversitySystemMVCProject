@@ -13,7 +13,7 @@ namespace StudentsCRUD.Entity.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201812111153116_first migration"; }
+            get { return "201812141410245_first-migration"; }
         }
         
         string IMigrationMetadata.Source

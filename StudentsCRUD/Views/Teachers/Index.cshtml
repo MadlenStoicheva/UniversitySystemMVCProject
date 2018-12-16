@@ -15,25 +15,29 @@
             <th style="text-align:center;">First Name</th>
             <th style="text-align:center;">Last Name</th>
             <th style="text-align:center;">Qualification Degree</th>
+            <th style="text-align:center;">Username</th>
+            <th style="text-align:center;">E-mail</th>
             <th></th>
         </tr>
     </thead>
     <tbody>
         @foreach (var teacher in Model.Teachers)
         {
-            <tr class="bg-info text-white" style="text-align:center; background-color:transparent;">
-                <td>@teacher.FirstName</td>
-                <td>@teacher.LastName</td>
-                <td>@teacher.QualificationDegree</td>
-                <td>
-                    <button class="btn-default" style="border-radius:15px; height:2.5em; width:5em;">
-                        @Html.ActionLink("Edit", "Edit", "Teachers", new { id = teacher.Id }, null)
-                    </button>
-                    <button class="btn-default" style="border-radius:15px; height:2.5em; width:5em;">
-                        @Html.ActionLink("Delete", "Delete", "Teachers", new { id = teacher.Id }, null)
-                    </button>
-                </td>
-            </tr>
+        <tr class="bg-info text-white" style="text-align:center; background-color:transparent;">
+            <td>@teacher.FirstName</td>
+            <td>@teacher.LastName</td>
+            <td>@teacher.QualificationDegree</td>
+            <td>@teacher.Username</td>
+            <td>@teacher.Email</td>
+            <td>
+                <button class="btn-default" style="border-radius:15px; height:2.5em; width:5em;">
+                    @Html.ActionLink("Edit", "Edit", "Teachers", new { id = teacher.Id }, null)
+                </button>
+                <button class="btn-default" style="border-radius:15px; height:2.5em; width:5em;">
+                    @Html.ActionLink("Delete", "Delete", "Teachers", new { id = teacher.Id }, null)
+                </button>
+            </td>
+        </tr>
         }
     </tbody>
 </table>

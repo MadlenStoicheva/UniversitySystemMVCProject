@@ -15,9 +15,11 @@ namespace StudentsCRUD.Controllers
 {
     public class StudentController : Controller
     {
+        
+        private StudentRepository repository = new StudentRepository();
+
         public ActionResult Index()
         {
-            StudentRepository repository = new StudentRepository();
             List<Student> students = repository.GetAll();
 
             StudentListViewModel model = new StudentListViewModel();
@@ -45,8 +47,12 @@ namespace StudentsCRUD.Controllers
             student.LastName = studentViewModel.LastName.First().ToString().ToUpper() + String.Join("", studentViewModel.LastName.Skip(1)); ;
             student.Specialty = studentViewModel.Specialty;
             student.FacultyNumber = studentViewModel.FacultyNumber;
+            student.Username = studentViewModel.Username;
+            student.Password = studentViewModel.Password;
+            student.Email = studentViewModel.Email;
 
-            var repository = new StudentRepository();
+
+            //var repository = new StudentRepository();
             repository.Insert(student);
 
             return RedirectToAction("Index");
@@ -56,7 +62,7 @@ namespace StudentsCRUD.Controllers
         [HttpGet]
         public ActionResult Edit(int? id)
         {
-            StudentRepository repository = new StudentRepository();
+          //  StudentRepository repository = new StudentRepository();
             StudentViewModel model = new StudentViewModel();
 
             if (id.HasValue)
@@ -67,6 +73,9 @@ namespace StudentsCRUD.Controllers
                 model.LastName = student.LastName;
                 model.Specialty = student.Specialty;
                 model.FacultyNumber = student.FacultyNumber;
+                model.Username = student.Username;
+                model.Password = student.Password;
+                model.Email = student.Email;
             }
 
             return View(model);
@@ -80,7 +89,7 @@ namespace StudentsCRUD.Controllers
                 return View(studentViewModel);
             }
 
-            StudentRepository repository = new StudentRepository();
+           // StudentRepository repository = new StudentRepository();
 
             Student student = new Student();
             student.Id = studentViewModel.Id;
@@ -88,6 +97,9 @@ namespace StudentsCRUD.Controllers
             student.LastName = studentViewModel.LastName.First().ToString().ToUpper() + String.Join("", studentViewModel.LastName.Skip(1)); ;
             student.Specialty = studentViewModel.Specialty;
             student.FacultyNumber = studentViewModel.FacultyNumber;
+            student.Username = studentViewModel.Username;
+            student.Password = studentViewModel.Password;
+            student.Email = studentViewModel.Email;
 
             repository.Save(student);
 
@@ -97,7 +109,7 @@ namespace StudentsCRUD.Controllers
         [HttpGet]
         public ActionResult Delete(int id)
         {
-            StudentRepository repository = new StudentRepository();
+          //  StudentRepository repository = new StudentRepository();
             Student student = repository.GetById(id);
 
             StudentViewModel model = new StudentViewModel();
@@ -105,6 +117,9 @@ namespace StudentsCRUD.Controllers
             model.LastName = student.LastName;
             model.Specialty = student.Specialty;
             model.FacultyNumber = student.FacultyNumber;
+            model.Username = student.Username;
+            model.Password = student.Password;
+            model.Email = student.Email;
 
             return View(model);
         }
@@ -112,7 +127,7 @@ namespace StudentsCRUD.Controllers
         [HttpPost]
         public ActionResult Delete(StudentViewModel model)
         {
-            StudentRepository repository = new StudentRepository();
+           // StudentRepository repository = new StudentRepository();
             if (model.Id.ToString() != String.Empty)
             {
                 repository.Delete(model.Id);

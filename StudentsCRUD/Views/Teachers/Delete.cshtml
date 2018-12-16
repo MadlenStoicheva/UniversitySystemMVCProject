@@ -29,6 +29,18 @@
         <dd style="font-size:20px;">
             @Html.DisplayFor(model => model.QualificationDegree)
         </dd>
+        <dt style="color: #333; font-size:20px;">
+            @Html.DisplayName("Username")
+        </dt>
+        <dd style="font-size:20px;">
+            @Html.DisplayFor(model => model.Username)
+        </dd>
+        <dt style="color: #333; font-size:20px;">
+            @Html.DisplayName("E-mail")
+        </dt>
+        <dd style="font-size:20px;">
+            @Html.DisplayFor(model => model.Email)
+        </dd>
     </dl>
 
     @using (Html.BeginForm())

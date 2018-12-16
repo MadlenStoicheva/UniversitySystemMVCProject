@@ -12,3 +12,4 @@ C:\Users\Madlen\source\repos\StudentsCRUD\StudentsCRUD.Entity\obj\Debug\Students
 C:\Users\Madlen\source\repos\StudentsCRUD\StudentsCRUD.Entity\obj\Debug\StudentsCRUD.Entity.pdb
 C:\Users\Madlen\source\repos\StudentsCRUD\StudentsCRUD.Entity\obj\Debug\StudentsCRUD.Entity.Migrations.firstmigration.resources
 C:\Users\Madlen\source\repos\StudentsCRUD\StudentsCRUD.Entity\obj\Debug\StudentsCRUD.Entity.csproj.GenerateResource.cache
+C:\Users\Madlen\source\repos\StudentsCRUD\StudentsCRUD.Entity\obj\Debug\StudentsCRUD.Entity.Migrations.secondmigration.resources

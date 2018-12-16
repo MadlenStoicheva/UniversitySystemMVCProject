@@ -30,6 +30,10 @@
                 <td>@subjects.Credits</td>
                 <td>
                     <button class="btn-default" style="border-radius:15px; height:2.5em; width:5em;">
+                        @Html.ActionLink("Add", "Add", "StudentSubject", new { id = subjects.Id }, null)
+                    </button>
+
+                    <button class="btn-default" style="border-radius:15px; height:2.5em; width:5em;">
                         @Html.ActionLink("Edit", "Edit", "Subject", new { id = subjects.Id }, null)
                     </button>
 

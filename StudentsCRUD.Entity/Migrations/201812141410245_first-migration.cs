@@ -16,6 +16,9 @@ namespace StudentsCRUD.Entity.Migrations
                         FacultyNumber = c.Int(nullable: false),
                         FirstName = c.String(),
                         LastName = c.String(),
+                        Email = c.String(),
+                        Username = c.String(),
+                        Password = c.String(),
                     })
                 .PrimaryKey(t => t.Id);
             
@@ -41,6 +44,9 @@ namespace StudentsCRUD.Entity.Migrations
                         QualificationDegree = c.String(),
                         FirstName = c.String(),
                         LastName = c.String(),
+                        Email = c.String(),
+                        Username = c.String(),
+                        Password = c.String(),
                     })
                 .PrimaryKey(t => t.Id);
             

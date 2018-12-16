@@ -8,7 +8,6 @@ namespace StudentsCRUD.Entity.Entity
 {
     public class Teacher : Person
     {
-       
         public string QualificationDegree { get; set; }
     }
 }

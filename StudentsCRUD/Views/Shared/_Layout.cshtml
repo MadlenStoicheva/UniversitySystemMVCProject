@@ -6,6 +6,19 @@
     <title>@ViewBag.Title - My ASP.NET Application</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+
+    <style>
+        footer {
+            position: absolute;
+            bottom: 0;
+            left: 40%;
+        }
+
+          h2 {
+               font-family:Oregano;
+               font-size:4em;
+            }
+    </style>
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -16,21 +29,43 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("University System", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("University System", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" , @style= "font-family:Oregano;font-size:2em;" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navbar-right">
-                    <li>@Html.ActionLink("Students", "Index", "Student")</li>
-                    <li>@Html.ActionLink("Teachers", "Index", "Teachers")</li>
-                    <li>@Html.ActionLink("Subjects", "Index", "Subject")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    @{
+                        if (StudentsCRUD.Filters.LoginFilter.IsNotLogedUser() == false)
+                        {
+                            if (StudentsCRUD.Filters.LoginFilter.IsAdmin() == (int)StudentsCRUD.Filters.Enums.Enums.Admin)
+                            {
+                                <li>@Html.ActionLink("Students", "Index", "Student")</li>
+                                <li>@Html.ActionLink("Teachers", "Index", "Teachers")</li>
+                                <li>@Html.ActionLink("Admins", "Index", "Admins")</li>
+
+                                <li>@Html.ActionLink("Subjects", "Index", "Subject")</li>
+                                <li class="btn-default">@Html.ActionLink("Logout", "Logout", "Home")</li>
+                            }
+                            else
+                            {
+                                <li>@Html.ActionLink("Subjects", "Index", "Subject")</li>
+                                <li class="btn-default">@Html.ActionLink("Logout", "Logout", "Home")</li>
+                            }
+
+                        }
+                        else
+                        {
+
+                            <li>@Html.ActionLink("Login", "Login", "Home")</li>
+                            <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                        }
+                    }
+
                 </ul>
             </div>
         </div>
     </div>
-    <div class="container body-content">
+    <div class="container-fluid body-content">
         @RenderBody()
-        <hr />
         <footer>
             <p>&copy; @DateTime.Now.Year - University System By Madlen Stoicheva</p>
         </footer>
