@@ -8,7 +8,7 @@ namespace StudentsCRUD.Filters
 {
     public static class LoginFilter
     {
-        public static int IsAdmin()
+        public static Enums.Enums GetRole()
         {
             Person user = (Person)HttpContext.Current.Session["LoggedUser"];
 
@@ -16,21 +16,20 @@ namespace StudentsCRUD.Filters
             {
                 if (user is Admin)
                 {
-                    return 0;
+                    return Enums.Enums.Admin;
                 }
                 else if (user is Teacher)
                 {
-                    return 1;
+                    return Enums.Enums.Teacher;
                 }
                 else
                 {
-                    return 2;
+                    return Enums.Enums.Student;
                 }
-
             }
             else
             {
-                return -1;
+                return Enums.Enums.NoUser;
             }
         }
 

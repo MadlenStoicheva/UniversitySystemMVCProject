@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using StudentsCRUD.Entity.Context;
 using StudentsCRUD.Entity.Entity;
 using StudentsCRUD.Entity.Repositories;
+using StudentsCRUD.Filters;
 using StudentsCRUD.Models.TeacherViewModel;
 
 namespace StudentsCRUD.Controllers
@@ -17,6 +18,7 @@ namespace StudentsCRUD.Controllers
     {
         private TeacherRepository repository = new TeacherRepository();
 
+        [AuthenticationFilter(RequireAdminRole = true)]
         public ActionResult Index()
         {
             List<Teacher> teachers = repository.GetAll();
@@ -27,6 +29,7 @@ namespace StudentsCRUD.Controllers
             return View(model);
         }
 
+        [AuthenticationFilter(RequireAdminRole = true)]
         public ActionResult Create()
         {
             return View();
@@ -40,23 +43,37 @@ namespace StudentsCRUD.Controllers
                 return View(teacherViewModel);
             }
 
-            Teacher teacher = new Teacher();
-            teacher.FirstName = teacherViewModel.FirstName.First().ToString().ToUpper() + String.Join("", teacherViewModel.FirstName.Skip(1));
-            teacher.LastName = teacherViewModel.LastName.First().ToString().ToUpper() + String.Join("", teacherViewModel.LastName.Skip(1));
-            teacher.QualificationDegree = teacherViewModel.QualificationDegree;
-            teacher.Username = teacherViewModel.Username;
-            teacher.Password = teacherViewModel.Password;
-            teacher.Email = teacherViewModel.Email;
+            Helpers.ListOfAllPeople list = new Helpers.ListOfAllPeople();
 
-            //var repository = new TeacherRepository();
-            repository.Insert(teacher);
+            if (list.GetPeople().Where(u => u.Email == teacherViewModel.Email).Any())
+            {
+                ModelState.AddModelError("error_email", "This email is already taken!");
+                return View();
+            }
+            else if (list.GetPeople().Where(u => u.Username == teacherViewModel.Username).Any())
+            {
 
+                ModelState.AddModelError("error_username", "This username is already taken!");
+                return View();
+            }
+            else
+            {
+                Teacher teacher = new Teacher();
+                teacher.FirstName = teacherViewModel.FirstName.First().ToString().ToUpper() + String.Join("", teacherViewModel.FirstName.Skip(1));
+                teacher.LastName = teacherViewModel.LastName.First().ToString().ToUpper() + String.Join("", teacherViewModel.LastName.Skip(1));
+                teacher.QualificationDegree = teacherViewModel.QualificationDegree;
+                teacher.Username = teacherViewModel.Username;
+                teacher.Password = teacherViewModel.Password;
+                teacher.Email = teacherViewModel.Email;
+
+                repository.Insert(teacher);
+            }
             return RedirectToAction("Index");
         }
 
+        [AuthenticationFilter(RequireAdminRole = true)]
         public ActionResult Edit(int? id)
         {
-            //TeacherRepository repository = new TeacherRepository();
             TeacherViewModel model = new TeacherViewModel();
 
             if (id.HasValue)
@@ -77,12 +94,6 @@ namespace StudentsCRUD.Controllers
         [HttpPost]
         public ActionResult Edit(TeacherViewModel teacherViewModel)
         {
-            if (!ModelState.IsValid)
-            {
-                return View(teacherViewModel);
-            }
-
-            //TeacherRepository repository = new TeacherRepository();
 
             Teacher teacher = new Teacher();
             teacher.Id = teacherViewModel.Id;
@@ -98,9 +109,9 @@ namespace StudentsCRUD.Controllers
             return RedirectToAction("Index");
         }
 
+        [AuthenticationFilter(RequireAdminRole = true)]
         public ActionResult Delete(int id)
         {
-         //   TeacherRepository repository = new TeacherRepository();
             Teacher teacher = repository.GetById(id);
 
             TeacherViewModel model = new TeacherViewModel();
@@ -117,7 +128,6 @@ namespace StudentsCRUD.Controllers
         [HttpPost]
         public ActionResult Delete(TeacherViewModel model)
         {
-          //  TeacherRepository repository = new TeacherRepository();
             if (model.Id.ToString() != String.Empty)
             {
                 repository.Delete(model.Id);

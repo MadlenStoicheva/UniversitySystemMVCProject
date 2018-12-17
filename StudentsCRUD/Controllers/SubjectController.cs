@@ -9,12 +9,14 @@ using System.Web.Mvc;
 using StudentsCRUD.Entity.Context;
 using StudentsCRUD.Entity.Entity;
 using StudentsCRUD.Entity.Repositories;
+using StudentsCRUD.Filters;
 using StudentsCRUD.Models.SubjectViewModel;
 
 namespace StudentsCRUD.Controllers
 {
     public class SubjectController : Controller
     {
+        [AuthenticationFilter]
         public ActionResult Index()
         {
             SubjectRepository repository = new SubjectRepository();
@@ -26,6 +28,7 @@ namespace StudentsCRUD.Controllers
             return View(model);
         }
 
+        [AuthenticationFilter]
         public ActionResult Create()
         {
             SubjectViewModel model = new SubjectViewModel();
@@ -38,6 +41,7 @@ namespace StudentsCRUD.Controllers
             return View(model);
         }
 
+        [AuthenticationFilter]
         [HttpPost]
         public ActionResult Create(SubjectViewModel subjectViewModel)
         {
@@ -75,9 +79,9 @@ namespace StudentsCRUD.Controllers
             return result;
         }
 
+        [AuthenticationFilter]
         public ActionResult Edit(int? id)
         {
-
             SubjectRepository repository = new SubjectRepository();
             SubjectViewModel model = new SubjectViewModel();
 
@@ -117,6 +121,7 @@ namespace StudentsCRUD.Controllers
             return RedirectToAction("Index");
         }
 
+        [AuthenticationFilter]
         public ActionResult Delete(int id)
         {
             SubjectRepository repository = new SubjectRepository();

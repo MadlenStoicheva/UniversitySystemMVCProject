@@ -1,15 +1,18 @@
 ﻿@model StudentsCRUD.Models.SubjectViewModel.SubjectListViewModel
 @{
+    /**/
+
     ViewBag.Title = "Index";
 }
 
 <h2 style="text-align:center">Subjects</h2>
+@if (StudentsCRUD.Filters.LoginFilter.GetRole() == StudentsCRUD.Filters.Enums.Enums.Admin || StudentsCRUD.Filters.LoginFilter.GetRole() == StudentsCRUD.Filters.Enums.Enums.Teacher)
+{
+    <button class="btn-success" style="border-radius:25px; background-color:#333; border-color:#333; height:3em; width:7em; margin-bottom:20px; ">
+        @Html.ActionLink("Create new", "Create", "Subject", new { @style = "color:white; text-decoration:none; font-weight:bold;" })
+    </button>
 
-<button class="btn-success"  style="border-radius:25px; background-color:#333; border-color:#333; height:3em; width:7em; margin-bottom:20px; ">
-    @Html.ActionLink("Create new", "Create", "Subject", new { @style = "color:white; text-decoration:none; font-weight:bold;" })
-</button>
-
-
+}
 <table class="table">
     <thead>
         <tr class="btn-success" style="background-color:#333; border-color:#333;">
@@ -29,18 +32,23 @@
                 <td>@subjects.Description</td>
                 <td>@subjects.Credits</td>
                 <td>
-                    <button class="btn-default" style="border-radius:15px; height:2.5em; width:5em;">
-                        @Html.ActionLink("Add", "Add", "StudentSubject", new { id = subjects.Id }, null)
-                    </button>
+                    @if (StudentsCRUD.Filters.LoginFilter.GetRole() == StudentsCRUD.Filters.Enums.Enums.Student)
+                    {
+                        <button class="btn-default" style="border-radius:15px; height:2.5em; width:5em;">
+                            @Html.ActionLink("Add", "Add", "StudentSubject", new { id = subjects.Id }, null)
+                        </button>
+                    }
 
-                    <button class="btn-default" style="border-radius:15px; height:2.5em; width:5em;">
-                        @Html.ActionLink("Edit", "Edit", "Subject", new { id = subjects.Id }, null)
-                    </button>
+                    @if (StudentsCRUD.Filters.LoginFilter.GetRole() == StudentsCRUD.Filters.Enums.Enums.Admin)
+                    {
+                        <button class="btn-default" style="border-radius:15px; height:2.5em; width:5em;">
+                            @Html.ActionLink("Edit", "Edit", "Subject", new { id = subjects.Id }, null)
+                        </button>
 
-                    <button class="btn-default" style="border-radius:15px; height:2.5em; width:5em;">
-                        @Html.ActionLink("Delete", "Delete", "Subject", new { id = subjects.Id }, null)
-                    </button>
-
+                        <button class="btn-default" style="border-radius:15px; height:2.5em; width:5em;">
+                            @Html.ActionLink("Delete", "Delete", "Subject", new { id = subjects.Id }, null)
+                        </button>
+                    }
                 </td>
             </tr>
         }

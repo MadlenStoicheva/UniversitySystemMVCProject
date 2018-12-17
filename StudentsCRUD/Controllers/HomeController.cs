@@ -11,6 +11,7 @@ namespace StudentsCRUD.Controllers
 {
     public class HomeController : Controller
     {
+
         public ActionResult Index()
         {
             return View();
@@ -25,32 +26,8 @@ namespace StudentsCRUD.Controllers
         [HttpPost]
         public ActionResult Login(LoginViewModel model)
         {
-           // UserRepository repo = new UserRepository();
-            List<Person> allPeople = new List<Person>();
-
-            AdminRepository adminRepository = new AdminRepository();
-            List<Admin> admins = adminRepository.GetAll();
-            foreach (var item in admins)
-            {
-                allPeople.Add(item);
-            }
-
-            TeacherRepository teacherRepository = new TeacherRepository();
-            List<Teacher> teachers = teacherRepository.GetAll();
-            foreach (var item in teachers)
-            {
-                allPeople.Add(item);
-            }
-
-            StudentRepository studentRepository = new StudentRepository();
-            List<Student> students = studentRepository.GetAll();
-            foreach (var item in students)
-            {
-                allPeople.Add(item);
-            }
-
-            List<Person> items = allPeople.Where(i => i.Username == model.Username && i.Password == model.Password).ToList();
-                //repo.GetAll(i => i.Username == model.Username && i.Password == model.Password);
+            Helpers.ListOfAllPeople list = new Helpers.ListOfAllPeople();
+            List<Person> items = list.GetPeople().Where(i => i.Username == model.Username && i.Password == model.Password).ToList();
 
             Session["LoggedUser"] = items.Count > 0 ? items[0] : null;
 
@@ -72,8 +49,6 @@ namespace StudentsCRUD.Controllers
             System.Web.HttpContext.Current.Session["LoggedUser"] = null;
             return RedirectToAction("Index", "Home");
         }
-
-
 
         public ActionResult About()
         {

@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using StudentsCRUD.Entity.Context;
 using StudentsCRUD.Entity.Entity;
 using StudentsCRUD.Entity.Repositories;
+using StudentsCRUD.Filters;
 using StudentsCRUD.Models.AdminViewModel;
 
 namespace StudentsCRUD.Controllers
@@ -17,6 +18,8 @@ namespace StudentsCRUD.Controllers
     {
         private AdminRepository repository = new AdminRepository();
 
+
+        [AuthenticationFilter(RequireAdminRole = true)]
         public ActionResult Index()
         {
             List<Admin> admins = repository.GetAll();
@@ -27,6 +30,7 @@ namespace StudentsCRUD.Controllers
             return View(model);
         }
 
+        [AuthenticationFilter(RequireAdminRole = true)]
         public ActionResult Create()
         {
             return View();
@@ -40,18 +44,35 @@ namespace StudentsCRUD.Controllers
                 return View(adminViewModel);
             }
 
-            Admin admin = new Admin();
-            admin.FirstName = adminViewModel.FirstName.First().ToString().ToUpper() + String.Join("", adminViewModel.FirstName.Skip(1));
-            admin.LastName = adminViewModel.LastName.First().ToString().ToUpper() + String.Join("", adminViewModel.LastName.Skip(1));
-            admin.Email = adminViewModel.Email;
-            admin.Username = adminViewModel.Username;
-            admin.Password = adminViewModel.Password;
+            Helpers.ListOfAllPeople list = new Helpers.ListOfAllPeople();
 
-            repository.Insert(admin);
+            if (list.GetPeople().Where(u => u.Email == adminViewModel.Email).Any())
+            {
+                ModelState.AddModelError("error_email", "This email is already taken!");
+                return View();
+            }
+            else if (list.GetPeople().Where(u => u.Username == adminViewModel.Username).Any())
+            {
 
+                ModelState.AddModelError("error_username", "This username is already taken!");
+                return View();
+            }
+            else
+            {
+                Admin admin = new Admin();
+                admin.FirstName = adminViewModel.FirstName.First().ToString().ToUpper() + String.Join("", adminViewModel.FirstName.Skip(1));
+                admin.LastName = adminViewModel.LastName.First().ToString().ToUpper() + String.Join("", adminViewModel.LastName.Skip(1));
+                admin.Email = adminViewModel.Email;
+                admin.Username = adminViewModel.Username;
+                admin.Password = adminViewModel.Password;
+
+                repository.Insert(admin);
+            }
+            
             return RedirectToAction("Index");
         }
 
+        [AuthenticationFilter(RequireAdminRole = true)]
         public ActionResult Edit(int? id)
         {
             AdminViewModel model = new AdminViewModel();
@@ -73,10 +94,6 @@ namespace StudentsCRUD.Controllers
         [HttpPost]
         public ActionResult Edit(AdminViewModel adminViewModel)
         {
-            if (!ModelState.IsValid)
-            {
-                return View(adminViewModel);
-            }
 
             Admin admin = new Admin();
             admin.Id = adminViewModel.Id;
@@ -91,6 +108,7 @@ namespace StudentsCRUD.Controllers
             return RedirectToAction("Index");
         }
 
+        [AuthenticationFilter(RequireAdminRole = true)]
         public ActionResult Delete(int id)
         {
             Admin admin = repository.GetById(id);
