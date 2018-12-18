@@ -8,7 +8,7 @@ namespace StudentsCRUD.Filters
 {
     public static class LoginFilter
     {
-        public static Enums.Enums GetRole()
+        public static Enums.UserRoles GetRole()
         {
             Person user = (Person)HttpContext.Current.Session["LoggedUser"];
 
@@ -16,20 +16,20 @@ namespace StudentsCRUD.Filters
             {
                 if (user is Admin)
                 {
-                    return Enums.Enums.Admin;
+                    return Enums.UserRoles.Admin;
                 }
                 else if (user is Teacher)
                 {
-                    return Enums.Enums.Teacher;
+                    return Enums.UserRoles.Teacher;
                 }
                 else
                 {
-                    return Enums.Enums.Student;
+                    return Enums.UserRoles.Student;
                 }
             }
             else
             {
-                return Enums.Enums.NoUser;
+                return Enums.UserRoles.NoUser;
             }
         }
 
@@ -43,6 +43,13 @@ namespace StudentsCRUD.Filters
             {
                 return false;
             }
+        }
+
+        public static int GetUserId()
+        {
+            Person person = (Person)HttpContext.Current.Session["LoggedUser"];
+
+            return person.Id;
         }
     }
 }

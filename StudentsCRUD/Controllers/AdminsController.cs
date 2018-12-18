@@ -10,14 +10,15 @@ using StudentsCRUD.Entity.Context;
 using StudentsCRUD.Entity.Entity;
 using StudentsCRUD.Entity.Repositories;
 using StudentsCRUD.Filters;
+using StudentsCRUD.Filters.Enums;
 using StudentsCRUD.Models.AdminViewModel;
 
 namespace StudentsCRUD.Controllers
 {
     public class AdminsController : Controller
     {
-        private AdminRepository repository = new AdminRepository();
 
+        private AdminRepository repository = new AdminRepository();
 
         [AuthenticationFilter(RequireAdminRole = true)]
         public ActionResult Index()
@@ -44,14 +45,15 @@ namespace StudentsCRUD.Controllers
                 return View(adminViewModel);
             }
 
-            Helpers.ListOfAllPeople list = new Helpers.ListOfAllPeople();
+            UserRepository userRepository = new UserRepository();
+            List<Person> list = userRepository.GetAll();
 
-            if (list.GetPeople().Where(u => u.Email == adminViewModel.Email).Any())
+            if (list.Where(u => u.Email == adminViewModel.Email).Any())
             {
                 ModelState.AddModelError("error_email", "This email is already taken!");
                 return View();
             }
-            else if (list.GetPeople().Where(u => u.Username == adminViewModel.Username).Any())
+            else if (list.Where(u => u.Username == adminViewModel.Username).Any())
             {
 
                 ModelState.AddModelError("error_username", "This username is already taken!");

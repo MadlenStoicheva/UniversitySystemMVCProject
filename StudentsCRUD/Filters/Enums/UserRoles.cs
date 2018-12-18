@@ -5,7 +5,7 @@ using System.Web;
 
 namespace StudentsCRUD.Filters.Enums
 {
-    public enum Enums
+    public enum UserRoles
     {
         NoUser = -1,
         Admin,

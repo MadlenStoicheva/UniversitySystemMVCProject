@@ -160,12 +160,12 @@
     <Compile Include="Controllers\SubjectController.cs" />
     <Compile Include="Controllers\TeachersController.cs" />
     <Compile Include="Filters\AuthenticationFilter.cs" />
-    <Compile Include="Filters\Enums\Enums.cs" />
+    <Compile Include="Filters\Enums\ConstantRolels.cs" />
+    <Compile Include="Filters\Enums\UserRoles.cs" />
     <Compile Include="Filters\LoginFilter.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Helpers\ListOfAllPeople.cs" />
     <Compile Include="Models\AdminViewModel\AdminListViewModel.cs" />
     <Compile Include="Models\AdminViewModel\AdminViewModel.cs" />
     <Compile Include="Models\LoginViewModel\LoginViewModel.cs" />
@@ -232,6 +232,7 @@
     <Content Include="Views\Admins\Edit.cshtml" />
     <Content Include="Views\Admins\Delete.cshtml" />
     <Content Include="Views\Home\Login.cshtml" />
+    <Content Include="Views\Subject\ShowTeacherSubjects.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

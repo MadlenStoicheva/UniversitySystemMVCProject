@@ -6,7 +6,7 @@
 }
 
 <h2 style="text-align:center">Subjects</h2>
-@if (StudentsCRUD.Filters.LoginFilter.GetRole() == StudentsCRUD.Filters.Enums.Enums.Admin || StudentsCRUD.Filters.LoginFilter.GetRole() == StudentsCRUD.Filters.Enums.Enums.Teacher)
+@if (StudentsCRUD.Filters.LoginFilter.GetRole() == StudentsCRUD.Filters.Enums.UserRoles.Admin || StudentsCRUD.Filters.LoginFilter.GetRole() == StudentsCRUD.Filters.Enums.UserRoles.Teacher)
 {
     <button class="btn-success" style="border-radius:25px; background-color:#333; border-color:#333; height:3em; width:7em; margin-bottom:20px; ">
         @Html.ActionLink("Create new", "Create", "Subject", new { @style = "color:white; text-decoration:none; font-weight:bold;" })
@@ -32,14 +32,14 @@
                 <td>@subjects.Description</td>
                 <td>@subjects.Credits</td>
                 <td>
-                    @if (StudentsCRUD.Filters.LoginFilter.GetRole() == StudentsCRUD.Filters.Enums.Enums.Student)
+                    @if (StudentsCRUD.Filters.LoginFilter.GetRole() == StudentsCRUD.Filters.Enums.UserRoles.Student)
                     {
                         <button class="btn-default" style="border-radius:15px; height:2.5em; width:5em;">
                             @Html.ActionLink("Add", "Add", "StudentSubject", new { id = subjects.Id }, null)
                         </button>
                     }
 
-                    @if (StudentsCRUD.Filters.LoginFilter.GetRole() == StudentsCRUD.Filters.Enums.Enums.Admin)
+                    @if (StudentsCRUD.Filters.LoginFilter.GetRole() == StudentsCRUD.Filters.Enums.UserRoles.Admin)
                     {
                         <button class="btn-default" style="border-radius:15px; height:2.5em; width:5em;">
                             @Html.ActionLink("Edit", "Edit", "Subject", new { id = subjects.Id }, null)

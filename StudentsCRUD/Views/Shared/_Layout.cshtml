@@ -36,7 +36,7 @@
                     @{
                         if (StudentsCRUD.Filters.LoginFilter.IsNotLogedUser() == false)
                         {
-                            if (StudentsCRUD.Filters.LoginFilter.GetRole() == (int)StudentsCRUD.Filters.Enums.Enums.Admin)
+                            if (StudentsCRUD.Filters.LoginFilter.GetRole() == (int)StudentsCRUD.Filters.Enums.UserRoles.Admin)
                             {
                                 <li>@Html.ActionLink("Students", "Index", "Student")</li>
                                 <li>@Html.ActionLink("Teachers", "Index", "Teachers")</li>

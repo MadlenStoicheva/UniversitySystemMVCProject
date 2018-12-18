@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 using StudentsCRUD.Entity.Context;
 using StudentsCRUD.Entity.Entity;
 using StudentsCRUD.Entity.Repositories;
@@ -16,7 +17,8 @@ namespace StudentsCRUD.Controllers
 {
     public class SubjectController : Controller
     {
-        [AuthenticationFilter]
+
+        
         public ActionResult Index()
         {
             SubjectRepository repository = new SubjectRepository();
@@ -28,7 +30,6 @@ namespace StudentsCRUD.Controllers
             return View(model);
         }
 
-        [AuthenticationFilter]
         public ActionResult Create()
         {
             SubjectViewModel model = new SubjectViewModel();
@@ -41,7 +42,6 @@ namespace StudentsCRUD.Controllers
             return View(model);
         }
 
-        [AuthenticationFilter]
         [HttpPost]
         public ActionResult Create(SubjectViewModel subjectViewModel)
         {
@@ -79,7 +79,6 @@ namespace StudentsCRUD.Controllers
             return result;
         }
 
-        [AuthenticationFilter]
         public ActionResult Edit(int? id)
         {
             SubjectRepository repository = new SubjectRepository();
@@ -121,7 +120,6 @@ namespace StudentsCRUD.Controllers
             return RedirectToAction("Index");
         }
 
-        [AuthenticationFilter]
         public ActionResult Delete(int id)
         {
             SubjectRepository repository = new SubjectRepository();
@@ -147,5 +145,33 @@ namespace StudentsCRUD.Controllers
 
             return RedirectToAction("Index");
         }
+
+        [HttpGet]
+        public ActionResult ShowTeacherSubjects()
+        {
+            int userId = LoginFilter.GetUserId();
+            SubjectRepository repository = new SubjectRepository();
+            List<Subject> subjects = repository.GetAll();
+
+            List<Subject> teacherSubjects = new List<Subject>();
+
+            foreach (var subject in subjects)
+            {
+                if (subject.TeacherId == userId)
+                {
+                    teacherSubjects.Add(subject);
+                }
+                else
+                {
+                    ViewBag.Message = "This user has no subjects yet!";
+                }
+            }
+
+            SubjectListViewModel model = new SubjectListViewModel();
+            model.Subjects = teacherSubjects;
+
+            return View(model);
+        }
     }
 }
+

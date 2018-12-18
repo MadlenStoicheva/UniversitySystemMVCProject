@@ -1,4 +1,5 @@
 ﻿using StudentsCRUD.Entity.Entity;
+using StudentsCRUD.Filters.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,6 +21,7 @@ namespace StudentsCRUD.Filters
         public override void OnActionExecuting(ActionExecutingContext filterContext)
         {
             Person loggedUser = (Person)HttpContext.Current.Session["LoggedUser"];
+           // HttpContext.Current.User.IsInRole(ConstantRolels.Admin);
 
             if (loggedUser == null || RequireAdminRole == false)
             {
@@ -27,9 +29,6 @@ namespace StudentsCRUD.Filters
                 return;
             }
             base.OnActionExecuting(filterContext);
-
-            Helpers.ListOfAllPeople listOfAllPeople = new Helpers.ListOfAllPeople();
-            Person loggedPerson = listOfAllPeople.GetPeople().Find(X => X.Id == loggedUser.Id);
 
             if (RequireAdminRole == true && !(loggedUser is Admin))
             {

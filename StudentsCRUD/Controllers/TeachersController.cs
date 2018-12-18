@@ -43,14 +43,15 @@ namespace StudentsCRUD.Controllers
                 return View(teacherViewModel);
             }
 
-            Helpers.ListOfAllPeople list = new Helpers.ListOfAllPeople();
+            UserRepository userRepository = new UserRepository();
+            List<Person> list = userRepository.GetAll();
 
-            if (list.GetPeople().Where(u => u.Email == teacherViewModel.Email).Any())
+            if (list.Where(u => u.Email == teacherViewModel.Email).Any())
             {
                 ModelState.AddModelError("error_email", "This email is already taken!");
                 return View();
             }
-            else if (list.GetPeople().Where(u => u.Username == teacherViewModel.Username).Any())
+            else if (list.Where(u => u.Username == teacherViewModel.Username).Any())
             {
 
                 ModelState.AddModelError("error_username", "This username is already taken!");

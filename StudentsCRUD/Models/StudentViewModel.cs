@@ -28,6 +28,6 @@ namespace StudentsCRUD.Models
         public string Specialty { get; set; }
 
         [Required(ErrorMessage = "Please enter Faculty number.")]
-        public int FacultyNumber { get; set; }
+        public string FacultyNumber { get; set; }
     }
 }

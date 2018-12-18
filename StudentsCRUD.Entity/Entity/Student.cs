@@ -9,6 +9,6 @@ namespace StudentsCRUD.Entity.Entity
     public class Student : Person
     {
         public string Specialty { get; set; }
-        public int FacultyNumber { get; set; }
+        public string FacultyNumber { get; set; }
     }
 }

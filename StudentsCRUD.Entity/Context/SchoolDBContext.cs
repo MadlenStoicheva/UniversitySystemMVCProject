@@ -13,6 +13,8 @@ namespace StudentsCRUD.Entity.Context
            : base("StudentSystemDB")
         {
         }
+
+        public DbSet<Person> People { get; set; }
         public DbSet<Student> Students { get; set; }
         public DbSet<Teacher> Teachers { get; set; }
         public DbSet<Admin> Admins { get; set; }

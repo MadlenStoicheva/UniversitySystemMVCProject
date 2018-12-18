@@ -26,8 +26,9 @@ namespace StudentsCRUD.Controllers
         [HttpPost]
         public ActionResult Login(LoginViewModel model)
         {
-            Helpers.ListOfAllPeople list = new Helpers.ListOfAllPeople();
-            List<Person> items = list.GetPeople().Where(i => i.Username == model.Username && i.Password == model.Password).ToList();
+            UserRepository userRepo = new UserRepository();
+            List<Person> list = userRepo.GetAll();
+            List<Person> items = list.Where(i => i.Username == model.Username && i.Password == model.Password).ToList();
 
             Session["LoggedUser"] = items.Count > 0 ? items[0] : null;
 

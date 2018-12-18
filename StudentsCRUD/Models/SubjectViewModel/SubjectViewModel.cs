@@ -19,7 +19,6 @@ namespace StudentsCRUD.Models.SubjectViewModel
         [Required(ErrorMessage = "Please enter credits.")]
         public int Credits { get; set; }
 
-        [Required(ErrorMessage = "Please enter Teacher.")]
         public List<SelectListItem> Teachers { get; set; }
         public int TeacherId { get; set; }
     }
